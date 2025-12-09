@@ -1,0 +1,56 @@
+# ==========================
+# Unity Optimized .gitignore
+# ==========================
+
+# --- Unity Generated Folders (NEVER COMMIT) ---
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+
+# Burst / PackageCache / Script Assemblies
+Library/PackageCache/
+Library/ScriptAssemblies/
+Library/Bee/
+Library/Artifacts/
+Library/il2cpp_cache/
+Library/ShaderCache/
+
+# Rider / VSCode / JetBrains
+.vscode/
+.idea/
+*.sln
+*.csproj
+*.unityproj
+*.pidb
+*.user
+*.userprefs
+
+# Crash / Reports
+sysinfo.txt
+
+# Unity Collaborate
+.collab/
+
+# Asset Store tools
+Assets/AssetStoreTools*
+
+# Lightmaps / GI Cache
+Library/GI/
+Library/Lightmapping/
+
+# Platforms
+*.apk
+*.aab
+*.ipa
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
