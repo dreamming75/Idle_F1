@@ -169,7 +169,7 @@ MonoBehaviour:
   handle: {fileID: 3888689863217670527}
   radius: 100
   deadZone: 0.05
-  showDistance: 10
+  showDistance: 15
 --- !u!225 &756913521393424102
 CanvasGroup:
   m_ObjectHideFlags: 0
