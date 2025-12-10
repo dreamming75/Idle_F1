@@ -19,6 +19,7 @@ Library/Bee/
 Library/Artifacts/
 Library/il2cpp_cache/
 Library/ShaderCache/
+Library/BurstCache/
 
 # Rider / VSCode / JetBrains
 .vscode/
