@@ -89,6 +89,7 @@ namespace IdleF1.Combat
         private void Move(Vector2 input)
         {
             float delta = moveSpeed * Time.deltaTime;
+            Vector3 planar = new Vector3(input.x, 0f, input.y);
 
             if (cachedRect != null)
             {
@@ -108,11 +109,18 @@ namespace IdleF1.Combat
                 }
 
                 cachedRect.anchoredPosition = newPos;
-                return;
+            }
+            else
+            {
+                transform.position += planar * delta;
             }
 
-            Vector3 planar = new Vector3(input.x, 0f, input.y);
-            transform.position += planar * delta;
+            // Snap-facing: look only fully left or fully right based on horizontal input.
+            if (Mathf.Abs(input.x) > 0.0001f)
+            {
+                Vector3 faceDir = input.x > 0f ? Vector3.right : Vector3.left;
+                transform.rotation = Quaternion.LookRotation(faceDir, Vector3.up);
+            }
         }
     }
 }
