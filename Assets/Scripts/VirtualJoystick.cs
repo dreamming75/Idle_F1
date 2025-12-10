@@ -28,6 +28,9 @@ namespace IdleF1.Combat
         public bool HasInput { get; private set; }
 
         private Vector2 center;
+        private Graphic backgroundGraphic;
+        private Graphic handleGraphic;
+        private bool isVisible;
 
         private void Start()
         {
@@ -36,18 +39,39 @@ namespace IdleF1.Combat
                 background = transform as RectTransform;
             }
 
+            backgroundGraphic = background != null ? background.GetComponent<Graphic>() : null;
+            handleGraphic = handle != null ? handle.GetComponent<Graphic>() : null;
+
             if (background != null)
             {
-                center = background.sizeDelta * 0.5f;
+                center = background.rect.center;
                 if (radius <= 0f)
                 {
                     radius = Mathf.Min(background.sizeDelta.x, background.sizeDelta.y) * 0.5f;
                 }
             }
+
+            SetVisible(false);
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            SetVisible(true);
+
+            if (background != null && background.parent is RectTransform parent)
+            {
+                if (RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, eventData.position, eventData.pressEventCamera, out var parentLocal))
+                {
+                    background.anchoredPosition = parentLocal;
+                }
+
+                center = background.rect.center;
+                if (handle != null)
+                {
+                    handle.anchoredPosition = Vector2.zero;
+                }
+            }
+
             OnDrag(eventData);
             HasInput = true;
         }
@@ -79,6 +103,29 @@ namespace IdleF1.Combat
             if (handle != null)
             {
                 handle.anchoredPosition = Vector2.zero;
+            }
+
+            SetVisible(false);
+        }
+
+        private void SetVisible(bool visible)
+        {
+            if (isVisible == visible) return;
+            isVisible = visible;
+
+            if (backgroundGraphic != null)
+            {
+                Color c = backgroundGraphic.color;
+                c.a = visible ? 1f : 0f;
+                backgroundGraphic.color = c;
+                backgroundGraphic.raycastTarget = true; // keep capturing touches
+            }
+
+            if (handleGraphic != null)
+            {
+                Color c = handleGraphic.color;
+                c.a = visible ? 1f : 0f;
+                handleGraphic.color = c;
             }
         }
     }
