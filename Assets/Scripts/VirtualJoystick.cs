@@ -24,6 +24,10 @@ namespace IdleF1.Combat
         [Tooltip("Ignore tiny movements to prevent drift.")]
         private float deadZone = 0.05f;
 
+        [SerializeField]
+        [Tooltip("How far (in pixels) the handle must be dragged from center before visuals appear.")]
+        private float showDistance = 8f;
+
         public Vector2 Direction { get; private set; }
         public bool HasInput { get; private set; }
 
@@ -49,6 +53,7 @@ namespace IdleF1.Combat
                 {
                     radius = Mathf.Min(background.sizeDelta.x, background.sizeDelta.y) * 0.5f;
                 }
+                showDistance = Mathf.Clamp(showDistance, 0f, radius);
             }
 
             SetVisible(false);
@@ -56,8 +61,6 @@ namespace IdleF1.Combat
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            SetVisible(true);
-
             if (background != null && background.parent is RectTransform parent)
             {
                 if (RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, eventData.position, eventData.pressEventCamera, out var parentLocal))
@@ -86,6 +89,11 @@ namespace IdleF1.Combat
             Vector2 delta = localPoint - center;
             Vector2 clamped = Vector2.ClampMagnitude(delta, radius);
             Vector2 rawDir = clamped / radius;
+
+            if (!isVisible && clamped.magnitude >= showDistance)
+            {
+                SetVisible(true);
+            }
 
             float magnitude = rawDir.magnitude;
             Direction = magnitude < deadZone ? Vector2.zero : rawDir.normalized * Mathf.InverseLerp(deadZone, 1f, magnitude);
