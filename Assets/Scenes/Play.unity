@@ -1588,6 +1588,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1943911069}
   - {fileID: 598000001}
   - {fileID: 1186467152}
   - {fileID: 2136281470}
@@ -6372,6 +6373,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919225953}
   m_CullTransparentMesh: 1
+--- !u!1 &1943911068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1943911069}
+  - component: {fileID: 1943911071}
+  - component: {fileID: 1943911070}
+  m_Layer: 0
+  m_Name: TapMovementArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1943911069
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943911068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 507873745}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1943911070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943911068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1943911071
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943911068}
+  m_CullTransparentMesh: 1
 --- !u!1 &1953647864
 GameObject:
   m_ObjectHideFlags: 0
@@ -7168,6 +7244,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VirtualJoystick
       objectReference: {fileID: 0}
+    - target: {fileID: 7271776180203873236, guid: 5a95ed125c44d458d843c1a58701f9af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7190,13 +7270,73 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: stepDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: tapMoveMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
       propertyPath: tapMoveSpeed
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: maxTapDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: tapAllowedArea
+      value: 
+      objectReference: {fileID: 1943911069}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: manualMoveSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: maxStepDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: movementAreaRect
+      value: 
+      objectReference: {fileID: 1943911069}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
       propertyPath: battleAreaManager
       value: 
       objectReference: {fileID: 1332338154}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: tapMoveStepDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: tapMoveSpeedConstant
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: constrainWithinParent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: enableTapDistanceLimit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: tapAllowedImages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: 'tapAllowedImages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1943911070}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: movementCurve.m_Curve.Array.data[1].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: movementCurve.m_Curve.Array.data[1].outSlope
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4573637615399076677, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
       propertyPath: m_Name
       value: Player
