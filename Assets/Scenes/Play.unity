@@ -7190,6 +7190,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
+      propertyPath: tapMoveSpeed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 44356659670578369, guid: 2116dff7ca5824e669c620c419fda920, type: 3}
       propertyPath: battleAreaManager
       value: 
       objectReference: {fileID: 1332338154}
