@@ -38,6 +38,13 @@ namespace IdleF1.Combat
         [Tooltip("전투 영역이 차지할 화면 비율 (0.7 = 70%)")]
         private float battleAreaRatio = 0.7f;
         
+        [Header("Cinemachine 설정")]
+        [SerializeField]
+        private GameObject cinemachineCamera;
+        
+        [SerializeField]
+        private bool useCinemachine = true;
+        
         private void Awake()
         {
             InitializeBattleArea();
@@ -54,6 +61,64 @@ namespace IdleF1.Combat
                     battleCanvas.renderMode = RenderMode.ScreenSpaceCamera;
                     battleCanvas.worldCamera = battleCamera;
                 }
+            }
+            
+            // CinemachineCamera 설정
+            if (useCinemachine)
+            {
+                SetupCinemachineCamera();
+            }
+        }
+        
+        private void SetupCinemachineCamera()
+        {
+            if (cinemachineCamera == null)
+            {
+                // CinemachineCamera를 자동으로 찾기
+                cinemachineCamera = GameObject.Find("CinemachineCamera");
+            }
+            
+            if (cinemachineCamera != null)
+            {
+                // CinemachineCamera 활성화
+                cinemachineCamera.SetActive(true);
+                
+                // Player를 자동으로 찾아서 타겟으로 설정 (리플렉션 사용)
+                GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+                if (playerObj != null)
+                {
+                    // CinemachineCamera 타입을 리플렉션으로 찾기
+                    System.Type cinemachineCameraType = System.Type.GetType("Unity.Cinemachine.CinemachineCamera, Unity.Cinemachine");
+                    if (cinemachineCameraType != null)
+                    {
+                        Component cmCamera = cinemachineCamera.GetComponent(cinemachineCameraType);
+                        if (cmCamera != null)
+                        {
+                            // TrackingTarget 속성 설정
+                            System.Reflection.PropertyInfo trackingTargetProp = cinemachineCameraType.GetProperty("TrackingTarget");
+                            if (trackingTargetProp != null)
+                            {
+                                trackingTargetProp.SetValue(cmCamera, playerObj.transform);
+                                Debug.Log("BattleAreaManager: CinemachineCamera가 Player를 타겟으로 설정되었습니다.");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("BattleAreaManager: Player를 찾을 수 없습니다. Tag가 'Player'로 설정되어 있는지 확인하세요.");
+                }
+                
+                // CinemachinePlayerFollow 컴포넌트가 있으면 사용
+                CinemachinePlayerFollow playerFollow = cinemachineCamera.GetComponent<CinemachinePlayerFollow>();
+                if (playerFollow == null)
+                {
+                    playerFollow = cinemachineCamera.AddComponent<CinemachinePlayerFollow>();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("BattleAreaManager: CinemachineCamera를 찾을 수 없습니다.");
             }
         }
         
