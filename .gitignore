@@ -55,3 +55,4 @@ Library/Lightmapping/
 # OS files
 .DS_Store
 Thumbs.db
+**/FR2_Cache.asset*
